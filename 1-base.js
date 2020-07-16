@@ -32,15 +32,17 @@ function dataTypes() {
     console.log (null); //typeof null выводит object - что является ошибкой
 };
 
+
 // 3 мутирование
 function mutation() {
-   console.log (string + ' обычная, ' + number123 + ' - числа, ' + boolean+ ' - булево значение, '+ x + ', ' + null +' - ВСЕ ПЕРЕМЕННЫЕ ПРИНЯЛИ СТРОКОВОЕ ЗНАЧЕНИЕ');
-   console.log (number123.toString()); // преобразование числа в строку методом .toString()
-   
    const massege1 = 'Ваше имя:';
    const firstName = prompt('Введите Имя');
    console.log  (massege1 + ' ' + firstName);
+
+   console.log (string + ' обычная, ' + number123 + ' - числа, ' + boolean+ ' - булево значение, '+ x + ', ' + null +' - ВСЕ ПЕРЕМЕННЫЕ ПРИНЯЛИ СТРОКОВОЕ ЗНАЧЕНИЕ');
+   console.log (number123.toString()); // преобразование числа в строку методом .toString()
 };
+
 
 // 4 Операторы
     const a = 100;
@@ -52,12 +54,13 @@ function operators(){
     c -= a; //c = c - a
     c *= a; //c = c * a
     c /= a; //c = c / a
-
-    console.log  (c);
+    
     console.log  (a + b);
     console.log  (a - b);
     console.log  (a * b);
     console.log  (a / b);
+
+    console.log  (c);
     console.log  (c++);
     console.log  (c);
     console.log  (++c);
@@ -65,7 +68,8 @@ function operators(){
     console.log  (--c); 
 };
 
-//5 приоритет операторов https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+
+// 5 Приоритет операторов https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 function operatorPrecedence(){
     console.log  (a < b);
     console.log  (a > b);
@@ -79,7 +83,6 @@ function operatorPrecedence(){
 
     console.log  (number123 == string123); //при двойном равенстве приводит типы данных к одному типу в данном случае к строке
     console.log  (number123 === string123); //при тройном равенстве проверяет и тип данных
-
 };
 
 
@@ -110,7 +113,7 @@ function conditionalStatements(){
 
 // 7 Булевая логика 1 и 0 или true и false
 // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/%D0%9B%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B
-// Думаю Дискретная математика будет полезна как некий практикум для отработки логических операций
+// Дискретная математика будет полезна как некий практикум для отработки логических операций
 function booleanLogoc(){
     // И
     console.log  (true && true); // 1 и 1 = 1
@@ -127,8 +130,8 @@ function booleanLogoc(){
     console.log  (!!true); // не1 -> не0 = 1 
 };
 
-// 8 Функции
 
+// 8 Функции
 function myFunction(){
 
     function calculate(year){
@@ -146,18 +149,16 @@ function myFunction(){
             console.log ('Человек по имени ' + name + ' сейчас имеет возраст ' + age + ' лет.');
         } else {
             console.log (name + ' еще не родилась.');
-        }
-        
+        }   
     };
 
    logInfoAbout('Vika', 1994);
    logInfoAbout('Svetlana', 1970);
    logInfoAbout('Katya', 2025);
-
 };
 
-// 9 Массивы
 
+// 9 Массивы
 function arryays() {
     const cars = ['Мазда', 'Мерседес', 'Форд'];
     //const cars = new Array('Мазда', 'Мерседес', 'Форд'); - другая запись объявления массива, но лучше использавать 1й вариант
@@ -174,10 +175,12 @@ function arryays() {
     cars[cars.length] = 'Тойота Chaser';
     console.log(cars.length); 
     console.log(cars[3]); //вывод: массов состоит из [0:Порше, 1:Мерседес, 2:Форд, 3:'', 4:'', 5:Мазда, 6:Тойота Chaser] = 7
+
+    const carsResult = cars.slice(); //копия массива
     console.log(carsResult); 
 };
 
-// 10 циклы
+// 10 Циклы
 function cycle1() {
     const cars2 = ['Мазда', 'Мерседес', 'Форд', 'Порше'];
 
@@ -190,6 +193,7 @@ function cycle1() {
         console.log(car2);
     };
 };
+
 
 // 11 Объекты
 function myObject() {
@@ -204,6 +208,7 @@ function myObject() {
             console.log('greet from person');
         }
    };
+
    console.log(person);
    console.log(person['lastName']);
    const key = 'languages';
@@ -214,7 +219,5 @@ function myObject() {
    person.hasBand = !!true;
    person.isProgrammer = true;
    console.log(person);
-
-    
 };
 
