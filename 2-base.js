@@ -219,3 +219,309 @@ function myFunction2() {
     console.log(logWithLastName('Виктория'));
     console.log(logWithLastName('Вика'));
 };
+
+
+// 7 Массивы
+function myArrays (){
+    const cars = ['Мазда', 'Форд', 'БМВ', 'Мерседес'];
+    const fib = [1, 1, 2, 3, 5, 8, 13];
+    const people = [
+        {name: 'Vladimir', budget: 4200},
+        {name: 'Elena', budget: 3500},
+        {name: 'Ekaterina', budget: 1700},
+    ];
+
+    cars.push('Рено');
+    cars.unshift('Волга');
+    console.log(cars);
+
+    const firstCar =  cars.shift();
+    console.log(firstCar);
+
+    const lastCar = cars.pop();
+    console.log(lastCar);
+    console.log(cars);
+    
+    console.log(cars.reverse());
+
+    const index = (cars.indexOf('БМВ'));
+    console.log(cars[index]);
+    cars[index] = 'Порш';
+    console.log(cars);
+
+    const index2 = people.findIndex(function(person) {
+        return person.budget === 3500;
+    });
+    console.log(people[index2]);
+
+   // const person = people.find(function(person) {
+   //     return person.budget === 3500;
+   // });
+    const person = people.find(person => person.budget === 3500)
+    console.log(person);
+
+    const upperCaseCars = cars.map(car => {
+    return car.toUpperCase();
+    });
+    console.log(upperCaseCars);
+
+    const pow2 = num => num ** 2;
+    const pow2Fib = fib.map(pow2);
+    const filteredNumbers = pow2Fib.filter(num => num > 20);
+    console.log(pow2Fib);
+    console.log(filteredNumbers);
+
+    const allBudger = people
+    .filter(person => person.budget > 2000)
+    .reduce((acc, person) => {
+        acc += person.budget;
+        return acc;
+    }, 0);
+
+    console.log(allBudger);
+
+    // Задача 1
+    const text  = 'Привет, мы изучаем JavaScript';
+    const reverseText = text.split('').reverse().join('');
+    console.log(reverseText);
+
+};
+
+// 8 Объекты
+function myObjects2 () {
+    const person = {
+        name: 'Viktoria',
+        age: 26,
+        isProgrammer: true,
+        languages: ['en', 'ru', 'de'],
+        'complex key':'Cpmplex Value',
+        ['key_' + (1 +3 )]: 'Computer Key', //key_4
+        greet(){
+            console.log('greet from person');
+        },
+        info () {
+            console.log('this', this);
+            console.info('Информация про человека по имени', this.name);
+        }
+
+    };
+
+    console.log(person);
+    console.log(person.name);
+    const ageKey = 'age';
+    console.log(person[ageKey]);
+    console.log(person['complex key']);
+    person.greet();
+
+    person.age++;
+    person.languages.push('by');
+    delete person['key_4'];
+
+    console.log(person);
+    console.log(person['key_4']);
+
+    const {name, age:personAge, languages} = person; // присваивание значений свойств переменным
+    console.log(name, personAge, languages);
+
+    for (let key in person){
+        if (person.hasOwnProperty(key)) {
+            console.log('key', key);
+            console.log('value', person[key]);
+        };
+    };
+
+    const keys = Object.keys(person);
+    console.log(keys);
+
+    Object.keys(person).forEach((key) => {
+        console.log('key', key);
+        console.log('value', person[key]);
+    });
+
+    const logger = {
+        keys() {
+            console.log('Ojgect keys:', Object.keys(this));
+        }
+    };
+    const bound = logger.keys.bind(person); // альтернатива logger.keys.call(person); - без вызова функции
+    bound();
+
+
+    const logger2 = {
+        keys() {
+            console.log('Ojgect keys2:', Object.keys(this))
+        },
+
+        keysAndValues() {
+            Object.keys(this).forEach( key => { // при данной конструкции не использовать обычную функциюы
+                console.log(`"${key}": ${this[key]}`);
+            });
+        },
+
+        withParams (top = false, beetween = false, bottom = false) {
+            if (top) {
+                console.log('------- Start -------');
+            };
+            
+            Object.keys(this).forEach( (key, index, array) => { 
+                console.log(`"${key}": ${this[key]}`);
+                if (beetween && index !== array.length - 1) {
+                    console.log('-------');
+                };
+            });
+
+            if (bottom) {
+                console.log('------- End -------');
+            };
+        }
+    };
+  logger2.keysAndValues.call(person);
+  logger2.withParams.call(person, true, true, true);
+
+};
+
+
+// 9 Ассинхронность
+function asynchrony () {
+    // Event Loop
+   const timeout =  setTimeout( () => {
+        console.log('After timeout');
+    }, 2500);
+
+    clearTimeout(timeout);
+
+    const interval = setInterval(() => {
+     //   console.log('After interval');
+    }, 1000);
+
+  //  const delay = (callback, wain = 1000) => {
+  //      setTimeout(callback, wain);
+  //  };
+
+  //  delay( () => {
+   //     console.log('After  2 seconds');
+   // }, 2000); 
+   
+   // Промис
+   const delay = (wait = 1000) => {
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+           // resolve();
+            reject('Что-то пошло не так.');
+            }, wait);
+        })
+        return promise;
+   };
+
+   delay(2000)
+   .then(() => {
+    console.log('After 2 seconds');
+   })
+   .catch(err => console.error('Error', err))
+   .finally(() => console.log('Finally'));
+
+   const getData = () => new Promise(resolve => resolve([
+       1, 1, 2, 3, 5, 8, 13
+   ]));
+
+  // getData().then(data => console.log(data));
+
+   async function asyncExample() {
+    try {
+        await delay(3000);
+        const data = await getData();
+        console.log('Data', data);
+    } catch (e) {
+        console.log(e) 
+    } finally {
+        console.log('Finally');
+    };
+   
+   };
+
+   asyncExample();
+
+};
+
+
+// 10 Работа с DOM
+function dom() {
+    const heading = document.getElementById('hello');
+    //const heading2 = document.getElementsByTagName('h2')[0];
+    //const heading2 = document.getElementsByClassName('h2-class')[0];
+    const heading2 = document.querySelector('h2'); //возвращает 1 элемент первый попавшийся
+    const heading3 = document.querySelector('.h2-class');
+    const heading4 = document.querySelector('#id-h2');
+    const allInput = document.querySelectorAll('input');
+    const bottom = allInput[allInput.length -1];
+
+    console.log(heading);
+    console.dir(heading);
+    console.dir(heading.id);
+    console.dir(heading.textContent);
+
+ //   setTimeout(() => {
+  //      heading.textContent = 'Changed from JavaScript!';
+  //      heading.style.color = 'red';
+  //      heading.style.textAlign = 'left';
+  //      heading.style.backgroundColor = '#ccc';
+  //      heading.style.padding = '1.5rem';
+  //  }, 2000);
+
+    setTimeout(() => {
+        addStyleTo(heading2, 'Скрипты подключены!');
+    }, 1500);
+
+    setTimeout(() => {
+        addStyleTo(heading3, '"Введение и основы" пройдены!', '#CC0033');
+    }, 3000);
+
+    const link = heading4.querySelector('a');
+
+    link.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log('Click on link', event.target.getAttribute('href'));
+        const url =  event.target.getAttribute('href');
+
+        window.location = url;
+    });
+    
+    setTimeout(() => {
+        addStyleTo(link,'Этап "Углубление в javaScript"', '#660099');
+    }, 4500);
+
+
+    setTimeout(() => {
+       addStyleTo2(bottom, '20px');
+    }, 5500);
+
+  function addStyleTo(node, text, color = 'red', fontSize) {
+    node.textContent = text;
+    node.style.color = color;
+    node.style.textAlign = 'center';
+    node.style.backgroundColor = '#ccccff';
+    node.style.padding = '1.5rem';
+    node.style.display = 'block';
+    node.style.width = '100%';
+  };
+
+  function addStyleTo2(node, fontSize) {
+   node.style.color = 'red';
+    // falsy: '', undefined, null, 0, false
+ //  if (fontSaze) {
+        node.style.fontSize = fontSize;
+  // };
+  };
+
+  heading2.onclick = () => {
+    if (heading2.style.color === 'red') {
+        heading2.style.color = '#000';
+        heading2.style.backgroundColor = '#fff';
+    } else {
+        heading2.style.color = 'red';
+        heading2.style.backgroundColor = '#ccccff';
+    };
+  };
+
+};
+

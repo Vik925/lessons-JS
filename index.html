@@ -6,13 +6,13 @@
     <title>Уроки по javaScript</title>
 </head>
 <body>
-    <h1 style="text-align: center;">Уроки по javaScript</h1>
-    <h2>Подключаем скрипты</h2>
+    <h1 style="text-align: center;" id="hello">Уроки по javaScript</h1>
+    <h2  >Подключаем скрипты</h2>
     <p>
         <input type="button" value="Hello World!" onclick="helloWorld()">
         <input type="button" value="Hello World from src!" onclick="helloWorldSrc()">
     </p>
-    <h2>1 Введение и основы</h2>
+    <h2 class="h2-class">1 Введение и основы</h2>
     <p>
         <input type="button" value="1 Переменные" onclick="variabels()">
         <input type="button" value="2 Типы данных" onclick="dataTypes()">
@@ -26,7 +26,7 @@
         <input type="button" value="10 Циклы" onclick="cycle1()">
         <input type="button" value="11 Объекты" onclick="myObject()">
     </p>
-    <h2>2 Углубление в javaScript</h2>
+    <h2 id="id-h2"><a href="https://github.com/Vik925/lessons-JS">Углубление в javaScript</a></h2>
     <p>
         <input type="button" value="1 Числа" onclick="numbers()">
         <input type="button" value="2 Тип данных BigInt" onclick="myBigInt()">
@@ -34,9 +34,13 @@
         <input type="button" value="4 Строки" onclick="myString()">
         <input type="button" value="5 Метод String" onclick="methodString()">
         <input type="button" value="6 Функции" onclick="myFunction2()">
+        <input type="button" value="7 Массивы" onclick="myArrays()">
+        <input type="button" value="8 Объекты" onclick="myObjects2()">
+        <input type="button" value="9 Асинхронность" onclick="asynchrony()">
+        <input type="button" value="10 Работа с DOM" onclick="dom()">
     </p>
-    
-    
+
+     
     
     <script>
         function helloWorld() {
