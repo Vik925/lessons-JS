@@ -459,6 +459,7 @@ function dom() {
     console.dir(heading);
     console.dir(heading.id);
     console.dir(heading.textContent);
+    console.log(allInput);
 
  //   setTimeout(() => {
   //      heading.textContent = 'Changed from JavaScript!';
